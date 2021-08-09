@@ -41,7 +41,7 @@ MQTT_SCHEMA = vol.Schema(
         vol.Optional('topic_prefix', default='frigate'): str,
         vol.Optional('client_id', default='frigate'): str,
         vol.Optional('stats_interval', default=60): int,
-        vol.Optional('ca_certs'): str,
+        vol.Optional('tls_ca_certs'): str,
         'user': str,
         'password': str
     }
@@ -357,7 +357,7 @@ class MqttConfig():
         self._user = config.get('user')
         self._password = config.get('password')
         self._stats_interval = config.get('stats_interval')
-        self._ca_certs = config.get('ca_certs')
+        self._tls_ca_certs = config.get('tls_ca_certs')
     
     @property
     def host(self):
@@ -388,8 +388,8 @@ class MqttConfig():
         return self._stats_interval
 
     @property
-    def ca_certs(self):
-        return self._ca_certs
+    def tls_ca_certs(self):
+        return self._tls_ca_certs
 
     def to_dict(self):
         return {
@@ -399,7 +399,7 @@ class MqttConfig():
             'client_id': self.client_id,
             'user': self.user,
             'stats_interval': self.stats_interval,
-            'ca_certs': self.ca_certs
+            'tls_ca_certs': self.tls_ca_certs
         }
 
 class CameraInput():
